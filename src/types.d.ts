@@ -20,7 +20,7 @@ export interface Pet {
   email: string;
   nome: string;
   celular: string;
-  status: 'perdido' | 'visto';
+  status: 'perdido' | 'achado';
   nomeAnimal: string;
   animalTipo: null;
   raca: string;

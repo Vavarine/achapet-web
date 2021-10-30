@@ -37,8 +37,8 @@ const getMapIcon = (imageUrl: string, status: 'perdido' | 'visto') => {
   return divIcon({
     className: 'custom-pin',
     iconSize: [80, 80],
-    iconAnchor: [29, 68],
-    popupAnchor: [status === 'perdido' ? 140 : -120, 24],
+    iconAnchor: [75, 90],
+    popupAnchor: [status === 'perdido' ? 100 : -170, 2],
     html: `
           <span style="${styles.span}">
             <img src="${imageUrl}" style="${styles.image}"/>

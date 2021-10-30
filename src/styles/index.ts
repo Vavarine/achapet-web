@@ -81,4 +81,16 @@ export function containerCenter() {
     margin: 0px auto`;
 }
 
+export function hidden() {
+  return `
+    visibility: hidden;
+    opacity: 0;`;
+}
+
+export function visible() {
+  return `
+    visibility: visible;
+    opacity: 1;`;
+}
+
 export { GlobalStyle } from './globalStyle';

@@ -5,6 +5,7 @@ import PetMarker from './PetMarker';
 
 import 'leaflet/dist/leaflet.css';
 import { Pet } from '../../types';
+import SearchPet from '../SearchPet';
 
 interface MapProps {
   pets: Pet[];
@@ -41,11 +42,13 @@ const Map = ({ pets }: MapProps) => {
         >
           <TileLayer
             attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            url={`https://api.mapbox.com/styles/v1/mapbox/streets-v10/tiles/256/{z}/{x}/{y}@2x?access_token=${process.env.NEXT_PUBLIC_MAPBOX_TOKEN}`}
           />
           {pets.map(pet => (
             <PetMarker key={pet.id} pet={pet} />
           ))}
+
+          <SearchPet pets={pets} />
         </MapContainer>
       ) : (
         ''
