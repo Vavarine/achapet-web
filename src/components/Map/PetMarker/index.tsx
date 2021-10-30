@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { Marker, Popup } from 'react-leaflet';
 import { divIcon } from 'leaflet';
+import { FiArrowRight } from 'react-icons/fi';
 
 import getMapIcon from './mapIcon';
 import usePetModal from '../../../hooks/usePetModal';
@@ -13,7 +14,14 @@ interface PetMarkerProps {
 }
 
 const PetMarker = ({ pet }: PetMarkerProps) => {
-  const { latitude, longitude, fotos, status, raca, nomeAnimal } = pet;
+  const {
+    latitude,
+    longitude,
+    fotos,
+    status = 'perdido',
+    raca,
+    nomeAnimal,
+  } = pet;
   const position = [parseFloat(latitude), parseFloat(longitude)];
 
   const { openModal } = usePetModal();
@@ -31,9 +39,12 @@ const PetMarker = ({ pet }: PetMarkerProps) => {
         status={status}
       >
         <div onClick={() => openModal(pet)}>
-          <p className="status">{status}</p>
+          <p className="status">{'perdido'}</p>
           <p className="name">{nomeAnimal}</p>
           <p className="breed">({raca})</p>
+          <div className="see-more">
+            Ver mais <FiArrowRight />
+          </div>
         </div>
       </S.PetCard>
     </Marker>

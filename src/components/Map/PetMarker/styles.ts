@@ -11,6 +11,7 @@ interface PetCardProps {
 
 export const PetCard = styled(Popup)<PetCardProps>`
   height: 80px;
+  width: 170px;
   border-radius: 18px;
 
   & > div {
@@ -58,6 +59,41 @@ export const PetCard = styled(Popup)<PetCardProps>`
       line-height: 22px;
       font-size: 20px;
       text-transform: capitalize;
+    }
+
+    .see-more {
+      position: absolute;
+      bottom: 8px;
+      left: 12px;
+
+      background-color: ${props => {
+        return props.status === 'perdido' ? '#FFF5F5' : '#FAFFF5';
+      }};
+
+      display: flex;
+      align-items: center;
+      column-gap: 5px;
+
+      margin-top: auto;
+      line-height: 22px;
+      font-size: 18px;
+      text-decoration: underline;
+
+      visibility: hidden;
+      opacity: 0;
+
+      transition: all 0.2s;
+
+      svg {
+        transform: translateY(2px);
+      }
+    }
+
+    :hover {
+      .see-more {
+        visibility: visible;
+        opacity: 1;
+      }
     }
   }
 
