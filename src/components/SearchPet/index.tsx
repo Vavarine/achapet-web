@@ -6,6 +6,7 @@ import { Pet } from '../../types';
 
 import * as S from './styles';
 import SearchPetCard from './SearchPetCard';
+import Toggle from '../Toggle';
 
 interface SearchPetsProps {
   pets: Pet[];
@@ -14,7 +15,9 @@ interface SearchPetsProps {
 const SearchPet = ({ pets }: SearchPetsProps) => {
   const [open, setOpen] = useState(false);
   const [queriedPetList, setQueriedPetList] = useState(pets);
-  const [loading, setLoading] = useState(false);
+  const [filteredPetsList, setFilteredList] = useState(pets);
+  const [showLost, setShowLost] = useState(true);
+  const [showFound, setShowFound] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
   const inputRef = useRef<HTMLInputElement>();
 
@@ -23,20 +26,22 @@ const SearchPet = ({ pets }: SearchPetsProps) => {
   }, [open]);
 
   useEffect(() => {
+    filterPets();
+  }, [showLost, showFound, queriedPetList]);
+
+  useEffect(() => {
     const timeoutId = setTimeout(() => {
-      console.log(searchTerm);
-
-      if (searchTerm !== '') {
-        searchPets();
-        return;
-      }
-
-      setQueriedPetList(pets);
+      searchPets();
     }, 1000);
     return () => clearTimeout(timeoutId);
   }, [searchTerm]);
 
   function searchPets() {
+    if (searchTerm === '') {
+      setQueriedPetList(pets);
+      return;
+    }
+
     const queriedPets = pets.filter(pet => {
       return Object.keys(pet).find(key => {
         if (typeof pet[key] === 'string') {
@@ -48,6 +53,25 @@ const SearchPet = ({ pets }: SearchPetsProps) => {
     });
 
     setQueriedPetList(queriedPets);
+  }
+
+  function filterPets() {
+    let filteredPets = queriedPetList.map(pet => ({
+      ...pet,
+      status: pet.status || 'perdido',
+    }));
+
+    console.log(filteredPets);
+
+    if (!showLost) {
+      filteredPets = filteredPets.filter(pet => pet.status !== 'perdido');
+    }
+
+    if (!showFound) {
+      filteredPets = filteredPets.filter(pet => pet.status !== 'achado');
+    }
+
+    setFilteredList(filteredPets);
   }
 
   function stringIncludes(str: string, term: string): boolean {
@@ -74,8 +98,20 @@ const SearchPet = ({ pets }: SearchPetsProps) => {
           <FiSearch size={24} color="#323232" />
         </div>
       </S.SearchBar>
+      <S.TogglesContainer open={open}>
+        <Toggle
+          title="perdidos"
+          defaultValue={showLost}
+          onChange={setShowLost}
+        />
+        <Toggle
+          title="achados"
+          defaultValue={showFound}
+          onChange={setShowFound}
+        />
+      </S.TogglesContainer>
       <S.PetList open={open}>
-        {queriedPetList.map(pet => (
+        {filteredPetsList.map(pet => (
           <SearchPetCard key={pet.id} pet={pet} />
         ))}
       </S.PetList>

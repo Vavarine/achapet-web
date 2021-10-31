@@ -80,8 +80,20 @@ export const SearchBar = styled.div<SearchPetProps>`
 
 export const PetList = styled.div<SearchPetProps>`
   position: fixed;
-  top: 100px;
+  top: 140px;
   right: ${props => (props.open ? '28px' : '-500px')};
 
   transition: all 0.4s ${props => (props.open ? '.2s' : '.0s')};
+`;
+
+export const TogglesContainer = styled.div<SearchPetProps>`
+  position: fixed;
+  top: 84px;
+  right: 35px;
+  display: flex;
+  column-gap: 20px;
+
+  ${props => (props.open ? visible : hidden)}
+
+  transition: all .2s;
 `;
