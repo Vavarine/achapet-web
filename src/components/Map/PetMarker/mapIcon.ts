@@ -1,6 +1,6 @@
 import { divIcon } from 'leaflet';
 
-const getMapIcon = (imageUrl: string, status: 'perdido' | 'visto') => {
+const getMapIcon = (imageUrl: string, status: 'perdido' | 'achado') => {
   const styles = {
     span: `
       display: block;
