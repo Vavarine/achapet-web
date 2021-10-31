@@ -22,7 +22,7 @@ export const SearchContainer = styled.div`
 export const SearchBar = styled.div<SearchPetProps>`
   position: relative;
   height: 50px;
-  width: ${props => (props.open ? '385px' : '50px')};
+  width: ${props => (props.open ? '440px' : '50px')};
 
   display: flex;
   align-items: center;
@@ -80,10 +80,33 @@ export const SearchBar = styled.div<SearchPetProps>`
 
 export const PetList = styled.div<SearchPetProps>`
   position: fixed;
+  padding: 10px;
+  padding-bottom: 15px;
   top: 140px;
   right: ${props => (props.open ? '28px' : '-500px')};
+  max-height: calc(100vh - 180px);
+  overflow: auto;
 
   transition: all 0.4s ${props => (props.open ? '.2s' : '.0s')};
+
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #3333;
+    border-radius: 3px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #333333;
+    border-radius: 2px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #222222;
+    border-radius: 3px;
+  }
 `;
 
 export const TogglesContainer = styled.div<SearchPetProps>`

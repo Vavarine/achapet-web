@@ -7,7 +7,7 @@ interface Props {
 }
 
 export const Container = styled.div<Props>`
-  width: 400px;
+  width: 450px;
   height: 90px;
   padding: 4px;
   padding-right: 10px;
@@ -16,13 +16,13 @@ export const Container = styled.div<Props>`
 
   background-color: ${props =>
     props.status === 'perdido'
-      ? 'rgba(255, 232, 232, 0.5)'
-      : 'rgba(239, 255, 223, 0.5)'};
-  backdrop-filter: blur(10px);
+      ? 'rgba(255, 232, 232, 1)'
+      : 'rgba(239, 255, 223, 1)'};
+  /* backdrop-filter: blur(10px); */
 
   display: flex;
   border-radius: 14px;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.25);
+  box-shadow: 1px 4px 10px 1px rgb(0 0 0 / 25%);
 
   cursor: pointer;
 
