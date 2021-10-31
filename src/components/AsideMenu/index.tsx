@@ -1,17 +1,24 @@
+import { useState } from 'react';
 import Link from 'next/link';
-import * as S from './styles';
-
-import Doggo from '../../assets/doggo.svg';
-import { User } from '../../types';
 import useAuth from '../../hooks/useAuth';
 import { MdPersonOutline } from 'react-icons/md';
+
+import { UserModal } from './UserModal';
+import Doggo from '../../assets/doggo.svg';
+import { User } from '../../types';
+import * as S from './styles';
 
 type AsideMenuProps = {
   user: User;
 };
 
 export const AsideMenu = ({ user }: AsideMenuProps) => {
+  const [isUserModalOpen, setIsUserModalOpen] = useState(false);
   const { logOut } = useAuth();
+
+  function toggleUserModal() {
+    setIsUserModalOpen(!isUserModalOpen);
+  }
 
   return (
     <S.Header>
@@ -19,10 +26,9 @@ export const AsideMenu = ({ user }: AsideMenuProps) => {
         <Doggo />
         <S.Logo>AchaPet</S.Logo>
       </S.LogoContainer>
-      <S.ContainerMenu>
-        <MdPersonOutline size={20} onClick={logOut} />
-        {/* <p>Olá {user.name}</p>
-        <button onClick={signOut}>Deslogar</button> */}
+      <S.ContainerMenu onClick={toggleUserModal}>
+        <MdPersonOutline size={20} />
+        <UserModal isOpen={isUserModalOpen} setIsOpen={setIsUserModalOpen} />
       </S.ContainerMenu>
     </S.Header>
   );
