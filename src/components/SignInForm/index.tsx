@@ -8,8 +8,6 @@ import getUnvalidFields from '../../utils/getUnvalidFields';
 import * as S from './styles';
 
 const SignInForm = () => {
-  const [isTermsAccepted, setIsTermsAccepted] = useState(false);
-
   const {
     register,
     handleSubmit,
@@ -32,7 +30,7 @@ const SignInForm = () => {
         loading: 'Um segundo...',
         success: data => {
           router.push('/login');
-          return `Bem vindo!`;
+          return `Conta criada!`;
         },
         error: err => {
           const status = err.response.status;
@@ -53,6 +51,8 @@ const SignInForm = () => {
   }
 
   async function signIn(name: string, email: string, password: string) {
+    console.log({ name, email, password });
+
     await api.post('/users/create', {
       nome: name,
       email,
@@ -73,7 +73,8 @@ const SignInForm = () => {
             name="name"
             type="name"
             id="name"
-            {...(register('name'), { required: true })}
+            {...register('name')}
+            required
           ></input>
 
           <label htmlFor="email" {...register('email')}>
@@ -83,7 +84,8 @@ const SignInForm = () => {
             name="email"
             type="email"
             id="email"
-            {...(register('email'), { required: true })}
+            {...register('email')}
+            required
           ></input>
           <span className="errorMessage">Preecha o campo corretamente</span>
 
@@ -92,7 +94,8 @@ const SignInForm = () => {
             name="email"
             type="password"
             id="password"
-            {...(register('password'), { required: true })}
+            {...register('password')}
+            required
           ></input>
 
           <S.AcceptTerms>
@@ -101,7 +104,8 @@ const SignInForm = () => {
                 type="checkbox"
                 name="acceptTerms"
                 id="acceptTerms"
-                {...(register('terms'), { required: true })}
+                {...register('terms')}
+                required
               />
               <label htmlFor="acceptTerms">Aceito os</label>
             </div>

@@ -40,6 +40,8 @@ const LoginForm = () => {
   async function onsubmit(data) {
     const { email, password } = data;
 
+    console.log(data);
+
     if (getUnvalidFields({ email, password }).length > 0) {
       toast.error('Preencha todos os campos');
       return;
@@ -83,16 +85,13 @@ const LoginForm = () => {
         </S.lineOr>
 
         <S.LoginWithEmailAndPass>
-          <label htmlFor="email" {...(register('email'), { required: true })}>
-            E-mail
-          </label>
+          <label htmlFor="email">E-mail</label>
           <input
             name="email"
             type="email"
             id="email"
             {...register('email')}
             onBlur={e => {}}
-            required
           ></input>
           <span className="errorMessage">Preecha o campo corretamente</span>
 
@@ -102,7 +101,6 @@ const LoginForm = () => {
             type="password"
             id="password"
             {...register('password')}
-            required
           ></input>
 
           <S.RememberMeAndResetPassword>
