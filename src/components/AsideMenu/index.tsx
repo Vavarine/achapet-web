@@ -16,20 +16,16 @@ export const AsideMenu = ({ user }: AsideMenuProps) => {
   const [isUserModalOpen, setIsUserModalOpen] = useState(false);
   const { logOut } = useAuth();
 
-  function toggleUserModal() {
-    setIsUserModalOpen(!isUserModalOpen);
-  }
-
   return (
     <S.Header>
       <S.LogoContainer>
         <Doggo />
         <S.Logo>AchaPet</S.Logo>
       </S.LogoContainer>
-      <S.ContainerMenu onClick={toggleUserModal}>
+      <S.ContainerMenu onClick={() => setIsUserModalOpen(true)}>
         <MdPersonOutline size={20} />
-        <UserModal isOpen={isUserModalOpen} setIsOpen={setIsUserModalOpen} />
       </S.ContainerMenu>
+      <UserModal isOpen={isUserModalOpen} setIsOpen={setIsUserModalOpen} />
     </S.Header>
   );
 };

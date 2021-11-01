@@ -19,6 +19,8 @@ interface AuthContextType {
   rememberMe: boolean;
   setRememberMe: Dispatch<SetStateAction<boolean>>;
   login: (email: string, password: string) => Promise<void>;
+  refreshUserData: (email: string, password: string) => Promise<void>;
+  authUser: (email: string, password: string) => Promise<void>;
   signInWithGoogle: () => Promise<void>;
   logOut: () => Promise<void>;
 }
@@ -75,6 +77,8 @@ export default function AuthContextProvider({
       setUser({
         name: data.user.nome,
         email: data.user.email,
+        photo: data.user.foto,
+        // celular: data.user.celular,
       });
 
       if (rememberMe) {
@@ -95,15 +99,20 @@ export default function AuthContextProvider({
       senha: password,
     });
 
+    console.log(data);
+
     if (data.auth) {
       const {
         token,
-        user: { email, nome },
+        // user: { email, nome, foto },
+        user: { email, nome, foto, celular },
       } = data;
 
       setUser({
         name: nome,
         email: email,
+        photo: foto,
+        cellphone: celular,
       });
 
       if (rememberMe) {
@@ -122,6 +131,49 @@ export default function AuthContextProvider({
     throw new Error('User not authenticated');
   }
 
+  async function authUser(email: string, password: string) {
+    console.log({ email, password });
+
+    const { data } = await api.post('/users/authenticate', {
+      email,
+      senha: password,
+    });
+
+    if (data.auth) {
+      return;
+    } else {
+      throw new Error('User not authenticated');
+    }
+  }
+
+  async function refreshUserData(email: string, password: string) {
+    const { data } = await api.post('/users/authenticate', {
+      email,
+      senha: password,
+    });
+
+    if (data.auth) {
+      const {
+        token,
+        user: { email, nome, foto, celular },
+        // user: { email, nome, celular },
+      } = data;
+
+      setUser({
+        name: nome,
+        email: email,
+        photo: foto,
+        cellphone: celular,
+      });
+
+      setCookie(undefined, 'achapet.authToken', token);
+
+      return;
+    } else {
+      throw new Error('User not authenticated');
+    }
+  }
+
   async function logOut() {
     await auth.signOut();
 
@@ -138,6 +190,8 @@ export default function AuthContextProvider({
         user,
         signInWithGoogle,
         login,
+        refreshUserData,
+        authUser,
         logOut: logOut,
         rememberMe,
         setRememberMe,

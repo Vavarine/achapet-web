@@ -40,14 +40,10 @@ const LoginForm = () => {
   async function onsubmit(data) {
     const { email, password } = data;
 
-    console.log(data);
-
     if (getUnvalidFields({ email, password }).length > 0) {
       toast.error('Preencha todos os campos');
       return;
     }
-
-    console.log({ email, password });
 
     toast.promise(
       login(email, password),

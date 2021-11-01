@@ -51,8 +51,6 @@ const SignInForm = () => {
   }
 
   async function signIn(name: string, email: string, password: string) {
-    console.log({ name, email, password });
-
     await api.post('/users/create', {
       nome: name,
       email,

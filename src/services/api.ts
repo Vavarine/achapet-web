@@ -1,8 +1,15 @@
 import axios from 'axios';
+import { parseCookies } from 'nookies';
 
 const api = axios.create({
   baseURL: 'https://achapet-backend.herokuapp.com',
 });
+
+const { 'achapet.authToken': token } = parseCookies();
+
+if (token) {
+  api.defaults.headers['x-access-token'] = token;
+}
 
 api.interceptors.request.use(config => {
   const { url, method, baseURL, data } = config;

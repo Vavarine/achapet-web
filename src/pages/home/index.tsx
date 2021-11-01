@@ -39,7 +39,7 @@ export const getServerSideProps: GetServerSideProps = async ctx => {
 
   const api = getApiClient(ctx);
 
-  console.log(process.env.MAPS_API_KEY);
+  // console.log(process.env.MAPS_API_KEY);
 
   if (!user) {
     return {
@@ -51,8 +51,6 @@ export const getServerSideProps: GetServerSideProps = async ctx => {
   }
 
   const { data } = await api.get('/postsAnimals/list');
-
-  console.log(data);
 
   return {
     props: {

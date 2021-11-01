@@ -4,10 +4,16 @@ export interface InstitutionalContent {
   text: string;
 }
 
+export interface UserPhoto {
+  url: string;
+}
 export interface User {
   name: string;
   email: string;
+  photo: UserPhoto;
+  cellphone?: number;
 }
+
 export interface Foto {
   idFoto: number;
   nomeFoto: string;

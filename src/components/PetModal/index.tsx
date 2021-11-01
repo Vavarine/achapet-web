@@ -34,10 +34,6 @@ export const PetModal = () => {
       .catch(err => console.log(err));
   }, [pet]);
 
-  useEffect(() => {
-    console.log(petLocationInfo);
-  }, [petLocationInfo]);
-
   if (pet && user) {
     return (
       <S.PetModal isOpen={isOpen}>

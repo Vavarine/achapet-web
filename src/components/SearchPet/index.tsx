@@ -61,8 +61,6 @@ const SearchPet = ({ pets }: SearchPetsProps) => {
       status: pet.status || 'perdido',
     }));
 
-    console.log(filteredPets);
-
     if (!showLost) {
       filteredPets = filteredPets.filter(pet => pet.status !== 'perdido');
     }
