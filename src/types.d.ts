@@ -12,6 +12,7 @@ export interface User {
   email: string;
   photo: UserPhoto;
   cellphone?: number;
+  googleToken?: string;
 }
 
 export interface Foto {

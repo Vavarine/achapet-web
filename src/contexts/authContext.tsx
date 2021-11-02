@@ -20,6 +20,11 @@ interface AuthContextType {
   setRememberMe: Dispatch<SetStateAction<boolean>>;
   login: (email: string, password: string) => Promise<void>;
   refreshUserData: (email: string, password: string) => Promise<void>;
+  refreshGoogleUserData: (
+    googleToken: string,
+    name: string,
+    email: string,
+  ) => Promise<void>;
   authUser: (email: string, password: string) => Promise<void>;
   signInWithGoogle: () => Promise<void>;
   logOut: () => Promise<void>;
@@ -74,11 +79,14 @@ export default function AuthContextProvider({
         email,
       });
 
+      console.log(data);
+
       setUser({
         name: data.user.nome,
         email: data.user.email,
         photo: data.user.foto,
-        // celular: data.user.celular,
+        googleToken: uid,
+        cellphone: data.user.celular,
       });
 
       if (rememberMe) {
@@ -174,6 +182,28 @@ export default function AuthContextProvider({
     }
   }
 
+  async function refreshGoogleUserData(
+    googleToken: string,
+    name: string,
+    email: string,
+  ) {
+    const { data } = await api.post('/users/authenticate', {
+      tokenGoogle: googleToken,
+      nome: name,
+      email,
+    });
+
+    setUser({
+      name: data.user.nome,
+      email: data.user.email,
+      photo: data.user.foto,
+      googleToken,
+      cellphone: data.user.celular,
+    });
+
+    return;
+  }
+
   async function logOut() {
     await auth.signOut();
 
@@ -191,6 +221,7 @@ export default function AuthContextProvider({
         signInWithGoogle,
         login,
         refreshUserData,
+        refreshGoogleUserData,
         authUser,
         logOut: logOut,
         rememberMe,

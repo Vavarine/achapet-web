@@ -16,7 +16,8 @@ interface UserModalProps {
 }
 
 export const UserModal = ({ isOpen, setIsOpen }: UserModalProps) => {
-  const { user, logOut, refreshUserData, authUser } = useAuth();
+  const { user, logOut, refreshUserData, refreshGoogleUserData, authUser } =
+    useAuth();
   const [userPhoto, setUserPhoto] = useState<UserPhoto>();
   const fileInputRef = useRef<HTMLInputElement>();
 
@@ -128,7 +129,9 @@ export const UserModal = ({ isOpen, setIsOpen }: UserModalProps) => {
     console.log({ data });
 
     try {
-      await authUser(user.email, data.password);
+      if (!user.googleToken) {
+        await authUser(user.email, data.password);
+      }
     } catch {
       console.log('dados não conferem');
       toast.error('A sua senha atual não é essa');
@@ -161,7 +164,11 @@ export const UserModal = ({ isOpen, setIsOpen }: UserModalProps) => {
         throw new Error('Unknown error');
       }
 
-      await refreshUserData(user.email, data.password);
+      if (user.googleToken) {
+        await refreshGoogleUserData(user.googleToken, data.name, user.email);
+      } else {
+        await refreshUserData(user.email, data.password);
+      }
       setIsOpen(false);
 
       setValue('password', '');
@@ -199,7 +206,11 @@ export const UserModal = ({ isOpen, setIsOpen }: UserModalProps) => {
       throw new Error('Refresh user data failed');
     }
 
-    await refreshUserData(user.email, data.newPassword);
+    if (user.googleToken) {
+      await refreshGoogleUserData(user.googleToken, data.name, user.email);
+    } else {
+      await refreshUserData(user.email, data.newPassword);
+    }
     setIsOpen(false);
 
     setValue('password', '');
@@ -272,6 +283,7 @@ export const UserModal = ({ isOpen, setIsOpen }: UserModalProps) => {
                   id="email"
                   {...register('email')}
                   required
+                  disabled
                 />
               </div>
               <div className="input-wrapper">
@@ -291,36 +303,43 @@ export const UserModal = ({ isOpen, setIsOpen }: UserModalProps) => {
               </div>
             </div>
             <span className="divisor"></span>
-            <div className="inputs-container">
-              <div className="input-wrapper">
-                <label htmlFor="password">Sua senha atual</label>
-                <input
-                  type="password"
-                  name="password"
-                  id="password"
-                  {...register('password')}
-                  required
-                />
+            {!user.googleToken ? (
+              <div className="inputs-container">
+                <div className="input-wrapper">
+                  <label htmlFor="password">Sua senha atual</label>
+                  <input
+                    type="password"
+                    name="password"
+                    id="password"
+                    {...register('password')}
+                    required
+                    disabled={user.googleToken ? true : false}
+                  />
+                </div>
+                <div className="input-wrapper">
+                  <label htmlFor="newPassword">Nova senha</label>
+                  <input
+                    type="password"
+                    name="newPassword"
+                    id="newPassword"
+                    {...register('newPassword')}
+                    disabled={user.googleToken ? true : false}
+                  />
+                </div>
+                <div className="input-wrapper">
+                  <label htmlFor="name">Repita a nova senha</label>
+                  <input
+                    type="password"
+                    name="repeatNewPassword"
+                    id="repeatNewPassword"
+                    {...register('repeatNewPassword')}
+                    disabled={user.googleToken ? true : false}
+                  />
+                </div>
               </div>
-              <div className="input-wrapper">
-                <label htmlFor="newPassword">Nova senha</label>
-                <input
-                  type="password"
-                  name="newPassword"
-                  id="newPassword"
-                  {...register('newPassword')}
-                />
-              </div>
-              <div className="input-wrapper">
-                <label htmlFor="name">Repita a nova senha</label>
-                <input
-                  type="password"
-                  name="repeatNewPassword"
-                  id="repeatNewPassword"
-                  {...register('repeatNewPassword')}
-                />
-              </div>
-            </div>
+            ) : (
+              <div className="inputs-container"></div>
+            )}
           </S.InputsContainers>
           <S.ButtonsContainer>
             <button className="logout" type="button" onClick={logOut}>
