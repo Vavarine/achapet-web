@@ -75,27 +75,37 @@ export const UserModal = ({ isOpen, setIsOpen }: UserModalProps) => {
         { icon: '😅' },
       );
     } else {
-      toast.promise(
-        sendUserData(data),
-        {
-          loading: 'Eviando dados...',
-          success: data => {
-            return `dados salvos!`;
-          },
-          error: err => `Não foi possivel enviar seus dados`,
-        },
-        {
-          success: {
-            icon: '🐈',
-          },
-          error: {
-            icon: '😓',
-          },
-        },
-      );
-    }
+      if (
+        data.newPassword !== '' &&
+        data.newPassword !== data.repeatNewPassword
+      ) {
+        toast('Sua nova senha não confere!', { icon: '😅' });
+        return;
+      }
 
-    refreshUserData(user.email, data.password);
+      try {
+        await toast.promise(
+          sendUserData(data),
+          {
+            loading: 'Eviando dados...',
+            success: data => {
+              return `dados salvos!`;
+            },
+            error: err => `Não foi possivel enviar seus dados`,
+          },
+          {
+            success: {
+              icon: '🐈',
+            },
+            error: {
+              icon: '😓',
+            },
+          },
+        );
+      } catch (err) {
+        console.log(err);
+      }
+    }
   }
 
   function handleImageChange(event: React.ChangeEvent<HTMLInputElement>) {
@@ -115,25 +125,28 @@ export const UserModal = ({ isOpen, setIsOpen }: UserModalProps) => {
   async function sendUserData(data: any) {
     console.log('data from form', data);
 
+    console.log({ data });
+
     try {
       await authUser(user.email, data.password);
     } catch {
       console.log('dados não conferem');
       toast.error('A sua senha atual não é essa');
-      throw new Error('User data not valid');
+
+      throw new Error('Current password is incorrect');
     }
 
-    const newData = {
+    let newData = {
       nome: data.name,
       email: data.email,
       celular: data.cellphone,
     };
 
+    console.log({ newData });
+
     if (data.newPassword === '') {
       try {
         console.log('dados alterados sem senha');
-
-        console.log(newData);
 
         const { data } = await api('/users/updateUser', {
           method: 'PUT',
@@ -144,26 +157,36 @@ export const UserModal = ({ isOpen, setIsOpen }: UserModalProps) => {
       } catch (err) {
         console.log(err);
         toast.error('Não foi possivel atualizar os seus dados');
-        throw new Error('User data was not send');
+
+        throw new Error('Unknown error');
       }
+
+      await refreshUserData(user.email, data.password);
+      setIsOpen(false);
+
+      setValue('password', '');
+      setValue('newPassword', '');
+      setValue('repeatNewPassword', '');
 
       return;
     }
 
     if (data.newPassword !== data.repeatNewPassword) {
       toast.error('A sua nova senha não confere');
-      throw new Error('New password don´t check');
+
+      throw new Error('New password no tvalid');
     }
 
     const newDataWithPassword = {
       nome: data.name,
       email: data.email,
       celular: data.cellphone,
-      senha: data.password,
+      senha: data.newPassword,
     };
 
     try {
       console.log('dados alterados com senha');
+      console.log(newDataWithPassword);
 
       await api('/users/updateUser', {
         method: 'PUT',
@@ -172,8 +195,16 @@ export const UserModal = ({ isOpen, setIsOpen }: UserModalProps) => {
     } catch (err) {
       console.log(err);
       toast.error('Não foi possivel atualizar os seus dados');
-      throw new Error('User data was not send');
+
+      throw new Error('Refresh user data failed');
     }
+
+    await refreshUserData(user.email, data.newPassword);
+    setIsOpen(false);
+
+    setValue('password', '');
+    setValue('newPassword', '');
+    setValue('repeatNewPassword', '');
   }
 
   async function sendUserPhoto() {

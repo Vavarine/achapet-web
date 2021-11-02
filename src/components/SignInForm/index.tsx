@@ -17,7 +17,7 @@ const SignInForm = () => {
   const router = useRouter();
 
   async function onsubmit(data) {
-    const { name, email, password } = data;
+    const { name, email, cellphone, password } = data;
 
     if (getUnvalidFields({ name, email, password }).length > 0) {
       toast.error('Preencha todos os campos');
@@ -25,7 +25,7 @@ const SignInForm = () => {
     }
 
     toast.promise(
-      signIn(name, email, password),
+      signIn(name, email, cellphone, password),
       {
         loading: 'Um segundo...',
         success: data => {
@@ -50,10 +50,16 @@ const SignInForm = () => {
     );
   }
 
-  async function signIn(name: string, email: string, password: string) {
+  async function signIn(
+    name: string,
+    email: string,
+    cellphone: string,
+    password: string,
+  ) {
     await api.post('/users/create', {
       nome: name,
       email,
+      celular: cellphone,
       senha: password,
     });
   }
@@ -86,6 +92,20 @@ const SignInForm = () => {
             required
           ></input>
           <span className="errorMessage">Preecha o campo corretamente</span>
+
+          <label htmlFor="password">Número de celular</label>
+          <input
+            type="text"
+            name="cellphone"
+            id="cellphone"
+            maxLength={11}
+            minLength={9}
+            onChange={e => {
+              e.target.value = e.target.value.replace(/[^\d]/, '');
+            }}
+            {...register('cellphone')}
+            required
+          ></input>
 
           <label htmlFor="password">Senha</label>
           <input

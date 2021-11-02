@@ -12,9 +12,9 @@ type AsideMenuProps = {
   user: User;
 };
 
-export const AsideMenu = ({ user }: AsideMenuProps) => {
+export const AsideMenu = () => {
   const [isUserModalOpen, setIsUserModalOpen] = useState(false);
-  const { logOut } = useAuth();
+  const { user } = useAuth();
 
   return (
     <S.Header>
@@ -23,7 +23,11 @@ export const AsideMenu = ({ user }: AsideMenuProps) => {
         <S.Logo>AchaPet</S.Logo>
       </S.LogoContainer>
       <S.ContainerMenu onClick={() => setIsUserModalOpen(true)}>
-        <MdPersonOutline size={20} />
+        {!user || user?.photo?.url.includes('undefined') ? (
+          <MdPersonOutline size={20} />
+        ) : (
+          <img src={user.photo.url} />
+        )}
       </S.ContainerMenu>
       <UserModal isOpen={isUserModalOpen} setIsOpen={setIsUserModalOpen} />
     </S.Header>

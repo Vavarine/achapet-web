@@ -31,7 +31,7 @@ export const Title = styled.h3`
   font-size: ${rem(32)};
   font-weight: 500;
 
-  margin-bottom: 60px;
+  margin-bottom: 40px;
 `;
 
 export const LoginWithEmailAndPass = styled.div`
@@ -56,7 +56,8 @@ export const LoginWithEmailAndPass = styled.div`
 
   #name,
   #email,
-  #password {
+  #password,
+  #cellphone {
     width: 100%;
     height: 42px;
     padding: 5px 5px 5px 20px;

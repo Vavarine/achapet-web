@@ -25,7 +25,7 @@ export const Home = ({ user, pets }: HomeProps) => {
 
   return (
     <S.HomeContainer>
-      <AsideMenu user={user} />
+      <AsideMenu />
       <div>
         <Map pets={pets} />
         <PetModal />

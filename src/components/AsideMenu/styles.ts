@@ -46,4 +46,10 @@ export const ContainerMenu = styled.section`
   border-radius: 50%;
   background: ${theme.color.text_description};
   cursor: pointer;
+
+  img {
+    height: 100%;
+    width: 100%;
+    border-radius: 50%;
+  }
 `;
