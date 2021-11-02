@@ -25,6 +25,9 @@ export const Home = ({ user, pets }: HomeProps) => {
 
   return (
     <S.HomeContainer>
+      <Head>
+        <title>Home | Achapet</title>
+      </Head>
       <AsideMenu />
       <div>
         <Map pets={pets} />
