@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Header, MadeByCard, WhatPeopleSayCard } from '../../components/index';
+import Head from 'next/head';
+import Link from 'next/link';
 // import { Header } from '../../components';
 import * as S from '../../styles/pages/landing/styles';
 
@@ -15,6 +17,9 @@ const LandingPage = () => {
 
   return (
     <S.Container>
+      <Head>
+        <title>Landing | AchaPet</title>
+      </Head>
       <Header />
       <main>
         <S.ContainerBackground>
@@ -28,7 +33,9 @@ const LandingPage = () => {
                 Lorem Ipsum is simply dummy text of the printing and typesetting
                 industry. Lorem Ipsum has been the industry's standard dummy
               </p>
-              <button>Saiba mais</button>
+              <Link href="/institutional/quem-somos">
+                <button>Saiba mais</button>
+              </Link>
             </S.TextContainerMainBanner>
             <S.MainBannerImg>
               <img src="/assets/banner-map.png" alt="Logo" />
@@ -55,7 +62,7 @@ const LandingPage = () => {
               Lorem Ipsum is simply dummy text of the printing and typesetting
               industry. Lorem Ipsum is simply dummy
             </p>
-            <a href="#">Saiba mais</a>
+            <a>Saiba mais</a>
           </S.AdoptContainerText>
           <S.AdoptContainerImg>
             <img src="/assets/logoPets.png " alt="Logo" />
