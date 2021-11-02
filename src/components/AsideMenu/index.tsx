@@ -26,7 +26,7 @@ export const AsideMenu = () => {
         {!user || user?.photo?.url.includes('undefined') ? (
           <MdPersonOutline size={20} />
         ) : (
-          <img src={user.photo.url} />
+          <img src={user?.photo?.url} />
         )}
       </S.ContainerMenu>
       <UserModal isOpen={isUserModalOpen} setIsOpen={setIsUserModalOpen} />

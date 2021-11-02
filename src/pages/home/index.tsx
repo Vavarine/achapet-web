@@ -52,10 +52,28 @@ export const getServerSideProps: GetServerSideProps = async ctx => {
 
   const { data } = await api.get('/postsAnimals/list');
 
+  const treatedData = data.map(pet => {
+    if (!pet.fotos) {
+      return { ...pet, fotos: [] };
+    }
+
+    if (typeof pet.fotos[0] == 'string') {
+      const fotos = pet.fotos[0].split(',').map(url => {
+        return { url };
+      });
+
+      return { ...pet, fotos };
+    }
+
+    return pet;
+  });
+
+  console.log(treatedData);
+
   return {
     props: {
       user: JSON.parse(user),
-      pets: data,
+      pets: treatedData,
     },
   };
 };
