@@ -110,9 +110,7 @@ const LoginForm = () => {
               />
               <label htmlFor="remember">Lembrar de mim</label>
             </div>
-            <div>
-              <a href="">Esqueci minha senha</a>
-            </div>
+            <div>{/* <a href="">Esqueci minha senha</a> */}</div>
           </S.RememberMeAndResetPassword>
           <S.SubmitButton>
             <button type="submit">
