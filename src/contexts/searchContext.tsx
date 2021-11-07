@@ -23,7 +23,7 @@ export const SearchContext = createContext({} as searchContextProps);
 export default function AuthContextProvider({
   children,
 }: PetModalProviderProps) {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
 
   function toggle() {
     setIsOpen(oldValue => !oldValue);
