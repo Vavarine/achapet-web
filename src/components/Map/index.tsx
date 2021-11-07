@@ -1,17 +1,25 @@
 import React, { useState, useEffect } from 'react';
-import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet';
+import {
+  MapContainer,
+  Marker,
+  Popup,
+  TileLayer,
+  useMapEvent,
+} from 'react-leaflet';
 
 import PetMarker from './PetMarker';
+import { ModalPet } from '../../components/index';
 
 import 'leaflet/dist/leaflet.css';
-import { Pet } from '../../types';
+import { Pet, User } from '../../types';
 import SearchPet from '../SearchPet';
 
-interface MapProps {
+interface HomeProps {
+  user: User;
   pets: Pet[];
 }
 
-const Map = ({ pets }: MapProps) => {
+const Map = ({ pets, user }: HomeProps) => {
   const [position, setPosition] = useState<number[]>();
   const [hasUserLocation, setHasUserLocation] = useState<boolean>(false);
 
@@ -49,6 +57,7 @@ const Map = ({ pets }: MapProps) => {
           ))}
 
           <SearchPet pets={pets} />
+          <LocationMarker user={user} />
         </MapContainer>
       ) : (
         ''
@@ -56,5 +65,28 @@ const Map = ({ pets }: MapProps) => {
     </>
   );
 };
+
+function LocationMarker({ user }: { user: User }) {
+  const [clickPosition, setClickPosition] = useState(null);
+  const [params, setParams] = useState(null);
+
+  useMapEvent('click', event => {
+    setParams(event.latlng);
+    setClickPosition(event.latlng);
+    console.log('event :>> ', event);
+  });
+
+  return clickPosition === null ? null : (
+    <Marker position={clickPosition}>
+      <ModalPet
+        latlng={params}
+        clearPosition={() => {
+          setClickPosition(null);
+        }}
+        user={user}
+      ></ModalPet>
+    </Marker>
+  );
+}
 
 export default Map;

@@ -1,8 +1,16 @@
 import axios from 'axios';
 import { parseCookies } from 'nookies';
+import { getTokenState } from './../states/token/index';
 
 const api = axios.create({
   baseURL: 'https://achapet-backend.herokuapp.com',
+});
+
+export const formDataApi = axios.create({
+  baseURL: 'https://achapet-backend.herokuapp.com',
+  headers: {
+    'Content-Type': `multipart/form-data`,
+  },
 });
 
 const { 'achapet.authToken': token } = parseCookies();
@@ -37,5 +45,16 @@ api.interceptors.response.use(
     return Promise.reject(error);
   },
 );
+
+const AuthorizationMiddleware = config => {
+  const token = getTokenState();
+  return {
+    ...config,
+    headers: { ...config.headers, 'x-access-token': token },
+  };
+};
+
+api.interceptors.request.use(AuthorizationMiddleware);
+formDataApi.interceptors.request.use(AuthorizationMiddleware);
 
 export default api;
