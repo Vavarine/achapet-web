@@ -63,16 +63,16 @@ export const TutorialModal = ({ dontShowTutorial }: TutorialModalProps) => {
             <figure>
               <img src="/assets/user-config.gif" alt="" />
             </figure>
-            <p>
-              Para editar as configurações da sua conta, adicionar uma foto ou
-              sair clique no botão de perfil no canto inferior esquerdo.
-            </p>
+            <p>Para cadastrar um pet, basta clicar no mapa onde você perdeu</p>
           </div>
           <div>
             <figure>
               <img src="/assets/user-config.gif" alt="" />
             </figure>
-            <p>Para buscar um pet, clique na lupa no canto superior direito</p>
+            <p>
+              Para editar as configurações da sua conta, adicionar uma foto ou
+              sair clique no botão de perfil no canto inferior esquerdo.
+            </p>
           </div>
         </S.InfoCarousel>
         <p className="dont-show-anymore" onClick={handleDontShowTutorial}>
