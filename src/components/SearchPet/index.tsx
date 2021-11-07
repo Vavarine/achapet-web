@@ -89,7 +89,7 @@ const SearchPet = ({ pets }: SearchPetsProps) => {
           type="text"
           ref={inputRef}
           value={searchTerm}
-          placeholder="Raça, cor, tipo, local..."
+          placeholder="Raça, cor ou tipo"
           onChange={e => setSearchTerm(e.target.value)}
         />
         <div className="search-icon-wrapper" onClick={() => setOpen(!open)}>

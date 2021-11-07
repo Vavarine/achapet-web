@@ -32,8 +32,6 @@ export const UserModal = ({ isOpen, setIsOpen }: UserModalProps) => {
 
   useEffect(() => {
     if (user) {
-      console.log(user);
-
       setUserPhoto(user.photo);
       setValue('name', user.name);
       setValue('email', user.email);
@@ -42,7 +40,6 @@ export const UserModal = ({ isOpen, setIsOpen }: UserModalProps) => {
   }, [user]);
 
   async function onSubmit(data) {
-    console.log(userPhoto.url !== user.photo.url);
     if (userPhoto.url !== user.photo.url) {
       await toast.promise(
         sendUserPhoto(),
