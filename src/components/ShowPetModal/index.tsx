@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import Geocode from 'react-geocode';
 import Modal from 'react-modal';
 import StepWizard from 'react-step-wizard';
+import useSearch from '../../hooks/useSearch';
 import { User } from '../../types';
 import { Step1 } from '../shared/Step01';
 import { Step2 } from '../shared/Step02';
@@ -40,6 +41,7 @@ export const ModalPet = ({
   clearPosition,
   user,
 }: LatLongProps) => {
+  const { isOpen: isSearchOpen } = useSearch();
   const [modalIsOpen, setModalIsOpen] = useState(true);
 
   const [number, setNumber] = useReState('numberClickMap', null);
@@ -109,6 +111,13 @@ export const ModalPet = ({
     requestCEP();
     setCurrentStep(1);
   }, []);
+
+  useEffect(() => {
+    if (isSearchOpen) {
+      setModalIsOpen(false);
+      clearPosition();
+    }
+  }, [isSearchOpen]);
 
   function closeModal() {
     setModalIsOpen(!modalIsOpen);

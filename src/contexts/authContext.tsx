@@ -57,7 +57,7 @@ export default function AuthContextProvider({
 
     if (rememberMe) {
       setCookie(undefined, 'achapet.user', JSON.stringify(user), {
-        maxAge: 60 * 60 * 24, // 1 day
+        maxAge: 60 * 60 * 24 * 7, // 7 days
       });
 
       return;
@@ -91,7 +91,7 @@ export default function AuthContextProvider({
 
       if (rememberMe) {
         setCookie(undefined, 'achapet.authToken', data.token, {
-          maxAge: 60 * 60 * 24, // 1 day
+          maxAge: 60 * 60 * 24 * 7, // 7 days
         });
       }
 
@@ -125,7 +125,7 @@ export default function AuthContextProvider({
 
       if (rememberMe) {
         setCookie(undefined, 'achapet.authToken', token, {
-          maxAge: 60 * 60 * 24, // 1 day
+          maxAge: 60 * 60 * 24 * 7, // 7 days
         });
 
         return;

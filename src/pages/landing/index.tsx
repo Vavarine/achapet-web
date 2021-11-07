@@ -52,7 +52,6 @@ const LandingPage = () => {
         </S.DescriptionContainer>
         <S.AdoptContainer>
           <S.AdoptContainerText>
-            <h2>Adote um pet</h2>
             <p>
               Lorem Ipsum is simply dummy text of the printing and typesetting
               industry. Lorem Ipsum is simply dummy text of the printing and

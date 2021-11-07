@@ -1,19 +1,18 @@
 import React, { useState, useEffect, useRef } from 'react';
-
 import { FiSearch, FiChevronLeft } from 'react-icons/fi';
-
 import { Pet } from '../../types';
 
 import * as S from './styles';
 import SearchPetCard from './SearchPetCard';
 import Toggle from '../Toggle';
+import useSearch from '../../hooks/useSearch';
 
 interface SearchPetsProps {
   pets: Pet[];
 }
 
 const SearchPet = ({ pets }: SearchPetsProps) => {
-  const [open, setOpen] = useState(false);
+  const { isOpen, setIsOpen } = useSearch();
   const [queriedPetList, setQueriedPetList] = useState(pets);
   const [filteredPetsList, setFilteredList] = useState(pets);
   const [showLost, setShowLost] = useState(true);
@@ -22,8 +21,8 @@ const SearchPet = ({ pets }: SearchPetsProps) => {
   const inputRef = useRef<HTMLInputElement>();
 
   useEffect(() => {
-    if (open) inputRef.current.focus();
-  }, [open]);
+    if (isOpen) inputRef.current.focus();
+  }, [isOpen]);
 
   useEffect(() => {
     filterPets();
@@ -81,22 +80,22 @@ const SearchPet = ({ pets }: SearchPetsProps) => {
 
   return (
     <S.SearchContainer>
-      <S.SearchBar open={open}>
-        <div className="chevron-wrapper" onClick={() => setOpen(!open)}>
+      <S.SearchBar open={isOpen}>
+        <div className="chevron-wrapper" onClick={() => setIsOpen(!isOpen)}>
           <FiChevronLeft size={26} color="#323232" />
         </div>
         <input
           type="text"
           ref={inputRef}
           value={searchTerm}
-          placeholder="Raça, cor, tipo, local..."
+          placeholder="Raça, cor ou tipo"
           onChange={e => setSearchTerm(e.target.value)}
         />
-        <div className="search-icon-wrapper" onClick={() => setOpen(!open)}>
+        <div className="search-icon-wrapper" onClick={() => setIsOpen(!isOpen)}>
           <FiSearch size={24} color="#323232" />
         </div>
       </S.SearchBar>
-      <S.TogglesContainer open={open}>
+      <S.TogglesContainer open={isOpen}>
         <Toggle
           title="perdidos"
           defaultValue={showLost}
@@ -108,7 +107,7 @@ const SearchPet = ({ pets }: SearchPetsProps) => {
           onChange={setShowFound}
         />
       </S.TogglesContainer>
-      <S.PetList open={open}>
+      <S.PetList open={isOpen}>
         {filteredPetsList.map(pet => (
           <SearchPetCard key={pet.id} pet={pet} />
         ))}
