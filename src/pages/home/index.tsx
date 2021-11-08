@@ -31,7 +31,7 @@ export const Home = ({ user, pets, dontShowTutorial }: HomeProps) => {
       </Head>
       <AsideMenu />
       <div>
-        <Map pets={pets} />
+        <Map pets={pets} user={user} />
         <PetModal />
         <TutorialModal dontShowTutorial={dontShowTutorial} />
       </div>

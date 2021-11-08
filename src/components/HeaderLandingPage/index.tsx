@@ -9,7 +9,7 @@ export const Header = () => {
         <img src="/assets/petLogo.png" alt="Logo" />
       </S.LinkHome>
       <S.LinksNavigation>
-        <a href="/">Adoção</a>
+        {/* <a href="/">Adoção</a> */}
         <a href="/">Depoimentos</a>
         <Link href="login">
           <a href="/">Começar</a>
