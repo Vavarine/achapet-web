@@ -23,6 +23,7 @@ api.interceptors.request.use(config => {
   const { url, method, baseURL, data } = config;
 
   console.log(`> [request] ${method} ${url}`);
+  console.log(config.headers);
 
   return config;
 });
@@ -47,7 +48,10 @@ api.interceptors.response.use(
 );
 
 const AuthorizationMiddleware = config => {
-  const token = getTokenState();
+  const { 'achapet.authToken': token } = parseCookies();
+
+  console.log(`> [token] ${token}`);
+
   return {
     ...config,
     headers: { ...config.headers, 'x-access-token': token },

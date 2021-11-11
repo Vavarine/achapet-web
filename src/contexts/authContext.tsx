@@ -89,11 +89,9 @@ export default function AuthContextProvider({
         cellphone: data.user.celular,
       });
 
-      if (rememberMe) {
-        setCookie(undefined, 'achapet.authToken', data.token, {
-          maxAge: 60 * 60 * 24 * 7, // 7 days
-        });
-      }
+      setCookie(undefined, 'achapet.authToken', data.token, {
+        maxAge: 60 * 60 * 24 * 7, // 7 days
+      });
 
       return;
     }
@@ -123,15 +121,9 @@ export default function AuthContextProvider({
         cellphone: celular,
       });
 
-      if (rememberMe) {
-        setCookie(undefined, 'achapet.authToken', token, {
-          maxAge: 60 * 60 * 24 * 7, // 7 days
-        });
-
-        return;
-      }
-
-      setCookie(undefined, 'achapet.authToken', token);
+      setCookie(undefined, 'achapet.authToken', token, {
+        maxAge: 60 * 60 * 24 * 7, // 7 days
+      });
 
       return;
     }
