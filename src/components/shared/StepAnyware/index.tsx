@@ -1,4 +1,5 @@
 import useReState from '@raulpesilva/re-state/dist';
+import axios from 'axios';
 import { StepWizardChildrenProps } from '../..';
 import api from '../../../services/api';
 import { User } from '../../../types';
@@ -24,7 +25,7 @@ export const StepAnyware = ({
   const [filesUploads] = useReState('filesUpload', []);
   const sendToBackRegister = async () => {
     const data = {
-      tipo: isActiveLostorFind ? 'achados' : 'perdidos',
+      tipoPost: isActiveLostorFind ? 'achados' : 'perdidos',
       email: props.user.email,
       nome: props.user.name,
       celular: 40028922,
@@ -38,15 +39,31 @@ export const StepAnyware = ({
       fotos: filesUploads,
     };
 
-    const response = await api.post('/postsAnimals/postagem', {
-      data: data,
-    });
+    console.log('data :>> ', data);
+    axios
+      .post(
+        'https://achapet-backend.herokuapp.com/postsAnimals/postagem',
+        data,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            'x-access-token':
+              'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZW5oYSI6IjEyMzQ1NiIsImlhdCI6MTYzNjc0NTE0OX0.6l-TLPDy9eccEk3-HxPeVN0Q9ko11IuzMNDNY7ulF2g',
+          },
+        },
+      )
+      .then(res => {
+        console.log('res :>> ', res);
+      })
+      .catch(err => {
+        console.log('err :>> ', err);
+      });
 
-    console.log('data response :>> ', response);
+    // console.log('data response :>> ', response);
 
-    if (response.status === 200) {
-      props.goToStep(4);
-    }
+    // if (response.status === 200) {
+    //   props.goToStep(4);
+    // }
   };
 
   return (
