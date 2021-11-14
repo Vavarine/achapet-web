@@ -22,6 +22,7 @@ const LandingPage = () => {
   }
 
   return (
+<<<<<<< HEAD
     <HashRouter>
       <S.Container>
         <Head>
@@ -53,6 +54,44 @@ const LandingPage = () => {
           <S.DescriptionContainer>
             <h2>AchaPet</h2>
             <h5>O site para encontra seu animal de estimação</h5>
+=======
+    <S.Container>
+      <Head>
+        <title>Landing | AchaPet</title>
+      </Head>
+      <Header />
+      <main>
+        <S.ContainerBackground>
+          <S.MainBanner>
+            <S.TextContainerMainBanner>
+              <h2>
+                AchaPet
+                <img src="/assets/petLogoBold.png" alt="Logo" />
+              </h2>
+              <p>
+                Lorem Ipsum is simply dummy text of the printing and typesetting
+                industry. Lorem Ipsum has been the industry's standard dummy
+              </p>
+              <Link href="/institutional/quem-somos">
+                <button>Saiba mais</button>
+              </Link>
+            </S.TextContainerMainBanner>
+            <S.MainBannerImg>
+              <img src="/assets/banner-map.png" alt="Logo" />
+            </S.MainBannerImg>
+          </S.MainBanner>
+        </S.ContainerBackground>
+        <S.DescriptionContainer>
+          <h2>AchaPet</h2>
+          <h5>O site para encontra seu animal de estimação</h5>
+          <p>
+            Lorem Ipsum is simply dummy text of the printing and typesetting
+            industry. Lorem Ipsum has been the industry's standard dummy
+          </p>
+        </S.DescriptionContainer>
+        <S.AdoptContainer>
+          <S.AdoptContainerText>
+>>>>>>> 8a163b96a9a8cf110c5eb74a8bba6e2d950a1c81
             <p>
               Lorem Ipsum is simply dummy text of the printing and typesetting
               industry. Lorem Ipsum has been the industry's standard dummy

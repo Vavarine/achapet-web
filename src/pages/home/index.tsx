@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { GetServerSideProps } from 'next';
 import dynamic from 'next/dynamic';
-import Modal from 'react-modal';
 import Head from 'next/head';
 import { parseCookies } from 'nookies';
 
@@ -14,13 +13,15 @@ import * as S from '../../styles/pages/home/styles';
 import { AsideMenu } from '../../components/AsideMenu';
 import getApiClient from '../../services/axios';
 import { PetModal } from '../../components/PetModal';
+import { TutorialModal } from '../../components/TutorialModal';
 
 interface HomeProps {
   user: User;
   pets: Pet[];
+  dontShowTutorial: boolean;
 }
 
-export const Home = ({ user, pets }: HomeProps) => {
+export const Home = ({ user, pets, dontShowTutorial }: HomeProps) => {
   const { isOpen } = usePetModal();
 
   return (
@@ -32,6 +33,7 @@ export const Home = ({ user, pets }: HomeProps) => {
       <div>
         <Map pets={pets} user={user} />
         <PetModal />
+        <TutorialModal dontShowTutorial={dontShowTutorial} />
       </div>
     </S.HomeContainer>
   );
@@ -39,6 +41,7 @@ export const Home = ({ user, pets }: HomeProps) => {
 
 export const getServerSideProps: GetServerSideProps = async ctx => {
   const { ['achapet.user']: user } = parseCookies(ctx);
+  const { ['achapet.dontShowTutorial']: dontShowTutorial } = parseCookies(ctx);
 
   const api = getApiClient(ctx);
 
@@ -77,6 +80,7 @@ export const getServerSideProps: GetServerSideProps = async ctx => {
     props: {
       user: JSON.parse(user),
       pets: treatedData,
+      dontShowTutorial: dontShowTutorial === 'true',
     },
   };
 };

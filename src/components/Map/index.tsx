@@ -13,6 +13,7 @@ import { ModalPet } from '../../components/index';
 import 'leaflet/dist/leaflet.css';
 import { Pet, User } from '../../types';
 import SearchPet from '../SearchPet';
+import useSearch from '../../hooks/useSearch';
 
 interface HomeProps {
   user: User;
