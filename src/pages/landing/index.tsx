@@ -22,48 +22,50 @@ const LandingPage = () => {
   }
 
   return (
-    <S.Container>
-      <Head>
-        <title>Landing | AchaPet</title>
-      </Head>
-      <Header />
-      <main>
-        <S.ContainerBackground>
-          <S.MainBanner>
-            <S.TextContainerMainBanner>
-              <h2>
-                AchaPet
-                <img src="/assets/petLogoBold.png" alt="Logo" />
-              </h2>
-              <p>
-                Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry. Lorem Ipsum has been the industry's standard dummy
-              </p>
-              <Link href="/institutional/quem-somos">
-                <button>Saiba mais</button>
-              </Link>
-            </S.TextContainerMainBanner>
-            <S.MainBannerImg>
-              <img src="/assets/banner-map.png" alt="Logo" />
-            </S.MainBannerImg>
-          </S.MainBanner>
-        </S.ContainerBackground>
-        <S.DescriptionContainer>
-          <h2>AchaPet</h2>
-          <h5>O site para encontra seu animal de estimação</h5>
-          <p>
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy
-          </p>
-        </S.DescriptionContainer>
-        <S.AdoptContainer>
-          <S.AdoptContainerText>
+    <HashRouter>
+      <S.Container>
+        <Head>
+          <title>Landing | AchaPet</title>
+        </Head>
+        <Header />
+        <main>
+          <S.ContainerBackground>
+            <S.MainBanner>
+              <S.TextContainerMainBanner>
+                <h2>
+                  AchaPet
+                  <img src="/assets/petLogoBold.png" alt="Logo" />
+                </h2>
+                <p>
+                  Lorem Ipsum is simply dummy text of the printing and
+                  typesetting industry. Lorem Ipsum has been the industry's
+                  standard dummy
+                </p>
+                <Link href="/institutional/quem-somos">
+                  <button>Saiba mais</button>
+                </Link>
+              </S.TextContainerMainBanner>
+              <S.MainBannerImg>
+                <img src="/assets/banner-map.png" alt="Logo" />
+              </S.MainBannerImg>
+            </S.MainBanner>
+          </S.ContainerBackground>
+          <S.DescriptionContainer>
+            <h2>AchaPet</h2>
+            <h5>O site para encontra seu animal de estimação</h5>
             <p>
               Lorem Ipsum is simply dummy text of the printing and typesetting
               industry. Lorem Ipsum has been the industry's standard dummy
             </p>
           </S.DescriptionContainer>
           <S.AdoptContainer>
+            <S.AdoptContainerText>
+              <p>
+                Lorem Ipsum is simply dummy text of the printing and typesetting
+                industry. Lorem Ipsum has been the industry's standard dummy
+              </p>
+            </S.AdoptContainerText>
+            <S.AdoptContainer />
             <S.AdoptContainerText>
               <h2>Adote um pet</h2>
               <p>

@@ -19,7 +19,6 @@ export const Header = () => {
         <img src="/assets/petLogo.png" alt="Logo" />
       </S.LinkHome>
       <S.LinksNavigation>
-<<<<<<< HEAD
         {screenSize > 1024 && (
           <>
             <a href="/">Adoção</a>
@@ -27,10 +26,6 @@ export const Header = () => {
           </>
         )}
 
-=======
-        {/* <a href="/">Adoção</a> */}
-        <a href="/">Depoimentos</a>
->>>>>>> 8a163b96a9a8cf110c5eb74a8bba6e2d950a1c81
         <Link href="login">
           <a href="/">Começar</a>
         </Link>
