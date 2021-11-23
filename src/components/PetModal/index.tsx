@@ -27,9 +27,11 @@ export const PetModal = () => {
       process.env.NEXT_PUBLIC_MAPS_API_KEY,
     )
       .then(cep => {
+        const cepValid = cep.replace('');
         axios
           .get(`https://brasilapi.com.br/api/cep/v2/${cep}`)
-          .then(response => setPetLocationInfo(response.data));
+          .then(response => setPetLocationInfo(response.data))
+          .catch(error => console.log('error :>> ', error));
       })
       .catch(err => console.log(err));
   }, [pet]);
