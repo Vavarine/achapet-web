@@ -25,9 +25,14 @@ export default function SearchPetCard({ pet }: SearchPetCardProps) {
       process.env.NEXT_PUBLIC_MAPS_API_KEY,
     )
       .then(cep => {
+        if (typeof cep !== 'string') return;
+        console.log('cep :>> ', cep);
         axios
           .get(`https://brasilapi.com.br/api/cep/v2/${cep}`)
-          .then(response => setPetLocationInfo(response.data));
+          .then(response => {
+            setPetLocationInfo(response.data);
+          })
+          .catch(error => console.log('error :>> ', error));
       })
       .catch(err => console.log(err));
   }, []);

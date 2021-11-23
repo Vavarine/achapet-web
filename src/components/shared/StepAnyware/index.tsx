@@ -1,9 +1,10 @@
 import useReState from '@raulpesilva/re-state/dist';
 import axios from 'axios';
+import { useCallback } from 'react';
 import { StepWizardChildrenProps } from '../..';
+import api, { formDataApi } from '../../../services/api';
 import { User } from '../../../types';
 import * as S from './styles';
-import api from '../../../services/api';
 export interface StepWizardStepAnywareChildrenProps
   extends StepWizardChildrenProps {
   user?: User;
@@ -22,12 +23,13 @@ export const StepAnyware = ({
   const [description] = useReState('descriptionAnimal', '');
   const [currentStep] = useReState('currentStepWizard', null);
   const [filesUploads] = useReState('filesUpload', []);
+
   const sendToBackRegister = async () => {
     const sendData = {
       tipoPost: isActiveLostorFind ? 'achados' : 'perdidos',
       email: props.user.email,
       nome: props.user.name,
-      celular: 40028922,
+      celular: '40028922',
       nomeAnimal: animalName,
       animalTipo: typeAnimal,
       raca: raceAnimal,
@@ -35,41 +37,20 @@ export const StepAnyware = ({
       caracteristicas: description,
       latitude: props.latitude,
       longitude: props.longitude,
-      fotos: filesUploads,
+      fotos: filesUploads.length > 0 ? filesUploads.join(',') : undefined,
     };
 
-    // console.log('sendData :>> ', sendData);
-    // const { data } = await api.post('/postsAnimals/postagem', sendData);
-
-    const { data } = await api('/postsAnimals/postagem', {
+    const response = await api('/postsAnimals/postagem', {
       method: 'POST',
       data: sendData,
+      headers: {
+        'Content-Type': 'application/json',
+      },
     });
-    console.log('response api post:>> ', data);
-    // axios
-    //   .post(
-    //     'https://achapet-backend.herokuapp.com/postsAnimals/postagem',
-    //     data,
-    //     {
-    //       headers: {
-    //         'Content-Type': 'application/json',
-    //         'x-access-token':
-    //           'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZW5oYSI6IjEyMzQ1NiIsImlhdCI6MTYzNjc0NTE0OX0.6l-TLPDy9eccEk3-HxPeVN0Q9ko11IuzMNDNY7ulF2g',
-    //       },
-    //     },
-    //   )
-    //   .then(res => {
-    //     console.log('res :>> ', res);
-    //   })
-    //   .catch(err => {
-    //     console.log('err :>> ', err);
-    //   });
 
-    // console.log('data response :>> ', response);
-
-    // if (response.status === 200) {
-    //   props.goToStep(4);
-    // }
+    if (response.status === 200) {
+      props.goToStep(4);
+    }
   };
 
   return (
