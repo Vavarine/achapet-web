@@ -59,6 +59,10 @@ export const getServerSideProps: GetServerSideProps = async ctx => {
   const { data } = await api.get('/postsAnimals/list');
 
   const treatedData = data.map(pet => {
+    if (!pet.status) {
+      pet.status = 'perdido';
+    }
+
     if (!pet.fotos) {
       return { ...pet, fotos: [] };
     }

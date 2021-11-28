@@ -38,7 +38,7 @@ const getMapIcon = (imageUrl: string, status: 'perdido' | 'achado') => {
     className: 'custom-pin',
     iconSize: [80, 80],
     iconAnchor: [75, 90],
-    popupAnchor: [status === 'perdido' ? 100 : -170, 2],
+    popupAnchor: [status === 'perdido' ? 115 : -180, 2],
     html: `
           <span style="${styles.span}">
             <img src="${imageUrl}" style="${styles.image}"/>

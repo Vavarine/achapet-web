@@ -7,7 +7,8 @@ interface Props {
 }
 
 export const Container = styled.div<Props>`
-  width: 450px;
+  position: relative;
+  width: 480px;
   height: 90px;
   padding: 4px;
   padding-right: 10px;
@@ -50,6 +51,9 @@ export const Container = styled.div<Props>`
   }
 
   .pet-info {
+    position: absolute;
+    height: calc(100% - 10px);
+    left: 90px;
     padding: 3px 0;
     margin-left: 6px;
     display: flex;
@@ -68,10 +72,27 @@ export const Container = styled.div<Props>`
     }
 
     p {
+      position: relative;
       width: fit-content;
+      width: 180px;
       font-size: 18px;
       line-height: 18px;
+      overflow: hidden;
       white-space: nowrap;
+
+      &::after {
+        position: absolute;
+        display: block;
+
+        top: 0;
+        right: 0;
+        content: '';
+
+        height: 100%;
+        width: 40px;
+
+        background: linear-gradient(to right, transparent, #ffe8e8);
+      }
     }
   }
 

@@ -2,6 +2,7 @@ import useReState from '@raulpesilva/re-state/dist';
 import axios from 'axios';
 import { useCallback } from 'react';
 import { StepWizardChildrenProps } from '../..';
+import useAuth from '../../../hooks/useAuth';
 import api, { formDataApi } from '../../../services/api';
 import { User } from '../../../types';
 import * as S from './styles';
@@ -24,12 +25,14 @@ export const StepAnyware = ({
   const [currentStep] = useReState('currentStepWizard', null);
   const [filesUploads] = useReState('filesUpload', []);
 
+  const { user } = useAuth();
+
   const sendToBackRegister = async () => {
     const sendData = {
       tipoPost: isActiveLostorFind ? 'achados' : 'perdidos',
       email: props.user.email,
       nome: props.user.name,
-      celular: '40028922',
+      celular: user.cellphone,
       nomeAnimal: animalName,
       animalTipo: typeAnimal,
       raca: raceAnimal,

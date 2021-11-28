@@ -11,7 +11,7 @@ interface PetCardProps {
 
 export const PetCard = styled(Popup)<PetCardProps>`
   height: 80px;
-  width: 170px;
+  width: 200px;
   border-radius: 18px;
 
   & > div {
@@ -55,16 +55,24 @@ export const PetCard = styled(Popup)<PetCardProps>`
     }
 
     .breed {
+      position: relative;
       margin-top: auto;
       line-height: 22px;
       font-size: 20px;
       text-transform: capitalize;
+
+      white-space: nowrap;
+      max-width: 100%;
+      overflow: hidden;
+
+      text-overflow: ellipsis;
     }
 
     .see-more {
       position: absolute;
-      bottom: 8px;
+      bottom: 6px;
       left: 12px;
+      width: calc(100% - 20px);
 
       background-color: ${props => {
         return props.status === 'perdido' ? '#FFF5F5' : '#FAFFF5';

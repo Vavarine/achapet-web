@@ -33,8 +33,8 @@ const PetMarker = ({ pet }: PetMarkerProps) => {
     <Marker position={[position[0], position[1]]} icon={mapIcon}>
       <S.PetCard
         closeButton={false}
-        minWidth={140}
-        maxWidth={140}
+        minWidth={170}
+        maxWidth={170}
         className="map-popup"
         status={status}
       >
