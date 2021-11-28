@@ -20,14 +20,29 @@ export const ContainerBackground = styled.section`
   ${containerCenter()};
 
   padding: 70px 70px 10px 70px;
+
+  @media (max-width: 1024px) {
+    padding: 70px 10px 10px 10px;
+  }
 `;
 
 export const MainBanner = styled.section`
   ${flexCenter()};
   justify-content: space-between;
+
+  @media (max-width: 1024px) {
+    flex-direction: column;
+  }
 `;
 
 export const TextContainerMainBanner = styled.div`
+  @media (max-width: 1024px) {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+  }
   h2 {
     ${flexCenter()};
     justify-content: flex-start;
@@ -38,6 +53,11 @@ export const TextContainerMainBanner = styled.div`
     img {
       width: 100px;
       height: auto;
+    }
+
+    @media (max-width: 1024px) {
+      font-size: ${rem(40)};
+      margin-bottom: 30px;
     }
   }
 
@@ -76,7 +96,13 @@ export const TextContainerMainBanner = styled.div`
   }
 `;
 
-export const MainBannerImg = styled.div``;
+export const MainBannerImg = styled.div`
+  img {
+    @media (max-width: 1024px) {
+      width: 100%;
+    }
+  }
+`;
 
 export const DescriptionContainer = styled.section`
   font-family: ${theme.font.secondary};
@@ -103,6 +129,10 @@ export const DescriptionContainer = styled.section`
     max-width: 900px;
     text-align: center;
   }
+
+  @media (max-width: 1024px) {
+    text-align: center;
+  }
 `;
 
 export const AdoptContainer = styled.section`
@@ -115,6 +145,13 @@ export const AdoptContainer = styled.section`
   background-size: 100% 100%;
   background-repeat: no-repeat;
   background-color: ${theme.color.background};
+
+  @media (max-width: 1024px) {
+    flex-direction: column-reverse;
+    text-align: center;
+
+    padding: 10px;
+  }
 
   h2 {
     font-size: ${rem(48)};
@@ -156,9 +193,23 @@ export const AdoptContainer = styled.section`
 `;
 export const AdoptContainerText = styled.section`
   width: 60%;
+
+  @media (max-width: 1024px) {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 `;
 export const AdoptContainerImg = styled.section`
   width: 40%;
+
+  img {
+    width: 100%;
+  }
+  @media (max-width: 1024px) {
+    width: 100%;
+  }
 `;
 
 export const WhatPeopleSay = styled.section`
@@ -175,6 +226,15 @@ export const WhatPeopleSay = styled.section`
       font-weight: bold;
     }
   }
+
+  @media (max-width: 1024px) {
+    padding: 35px 10px;
+    text-align: center;
+
+    h2 {
+      margin-bottom: 10px;
+    }
+  }
 `;
 
 export const WhatPeopleSayWrapper = styled.div`
@@ -182,6 +242,10 @@ export const WhatPeopleSayWrapper = styled.div`
   justify-content: space-between;
 
   width: 100%;
+
+  @media (max-width: 1024px) {
+    flex-direction: column;
+  }
 `;
 
 export const MadeBy = styled.section`
@@ -205,4 +269,6 @@ export const MadeByWrapper = styled.div`
 
   ${flexCenter()};
   flex-wrap: wrap;
+
+  overflow: hidden;
 `;

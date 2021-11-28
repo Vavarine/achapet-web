@@ -44,7 +44,7 @@ export const Step3 = (props: StepWizardStep3ChildrenProps) => {
     setFilesUploads(ant => [...ant, response.data]);
   };
 
-  console.log('returnFilesPost :>> ', filesUploads.join());
+  console.log('returnFilesPost :>> ', filesUploads.join(','));
 
   const sendImage = event => {
     if (filesUploads.length > 3) return;

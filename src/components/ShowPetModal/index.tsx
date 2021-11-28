@@ -90,11 +90,6 @@ export const ModalPet = ({
           }
         }
 
-        console.log('response :>> ', response);
-        console.log('city ', city);
-        console.log('state ', state);
-        console.log('street ', street);
-        console.log('number ', number);
         setNumber(number);
         setCity(city);
         setState(state);

@@ -35,6 +35,10 @@ export const Container = styled.div`
     bottom: -10px;
     right: 5px;
   }
+
+  @media (max-width: 1024px) {
+    box-shadow: 1px 10px 11px -1px rgb(0 0 0 / 13%);
+  }
 `;
 export const Text = styled.div`
   color: #828282;

@@ -13,7 +13,7 @@ import * as S from '../../styles/pages/home/styles';
 import { AsideMenu } from '../../components/AsideMenu';
 import getApiClient from '../../services/axios';
 import { PetModal } from '../../components/PetModal';
-import { TutorialModal } from '../../components/TutorialModal';
+// import { TutorialModal } from '../../components/TutorialModal';
 
 interface HomeProps {
   user: User;
@@ -33,7 +33,7 @@ export const Home = ({ user, pets, dontShowTutorial }: HomeProps) => {
       <div>
         <Map pets={pets} user={user} />
         <PetModal />
-        <TutorialModal dontShowTutorial={dontShowTutorial} />
+        {/* <TutorialModal dontShowTutorial={dontShowTutorial} /> */}
       </div>
     </S.HomeContainer>
   );

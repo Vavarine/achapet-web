@@ -1,9 +1,10 @@
 import useReState from '@raulpesilva/re-state/dist';
+import axios from 'axios';
+import { useCallback } from 'react';
 import { StepWizardChildrenProps } from '../..';
-import api from '../../../services/api';
+import api, { formDataApi } from '../../../services/api';
 import { User } from '../../../types';
 import * as S from './styles';
-
 export interface StepWizardStepAnywareChildrenProps
   extends StepWizardChildrenProps {
   user?: User;
@@ -22,12 +23,13 @@ export const StepAnyware = ({
   const [description] = useReState('descriptionAnimal', '');
   const [currentStep] = useReState('currentStepWizard', null);
   const [filesUploads] = useReState('filesUpload', []);
+
   const sendToBackRegister = async () => {
-    const data = {
-      tipo: isActiveLostorFind ? 'achados' : 'perdidos',
+    const sendData = {
+      tipoPost: isActiveLostorFind ? 'achados' : 'perdidos',
       email: props.user.email,
       nome: props.user.name,
-      celular: 40028922,
+      celular: '40028922',
       nomeAnimal: animalName,
       animalTipo: typeAnimal,
       raca: raceAnimal,
@@ -35,14 +37,16 @@ export const StepAnyware = ({
       caracteristicas: description,
       latitude: props.latitude,
       longitude: props.longitude,
-      fotos: filesUploads,
+      fotos: filesUploads.length > 0 ? filesUploads.join(',') : undefined,
     };
 
-    const response = await api.post('/postsAnimals/postagem', {
-      data: data,
+    const response = await api('/postsAnimals/postagem', {
+      method: 'POST',
+      data: sendData,
+      headers: {
+        'Content-Type': 'application/json',
+      },
     });
-
-    console.log('data response :>> ', response);
 
     if (response.status === 200) {
       props.goToStep(4);
