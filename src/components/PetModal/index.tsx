@@ -10,6 +10,8 @@ import * as S from './styles';
 import { PetGallery } from './PetGallery';
 import { LocationInfo } from '../../types';
 import { RemovePet } from './RemovePet';
+import api from '../../services/api';
+import toast from 'react-hot-toast';
 
 export const PetModal = () => {
   const [petLocationInfo, setPetLocationInfo] = useState<LocationInfo>();
@@ -35,6 +37,34 @@ export const PetModal = () => {
       })
       .catch(err => console.log(err));
   }, [pet]);
+
+  function remove() {
+    toast.promise(
+      api.delete('/postsAnimals/deletePostsAnimals', {
+        data: {
+          id: pet.id,
+          email: user.email,
+          tipo: pet.status === 'achado' ? 'achados' : 'perdidos',
+        },
+      }),
+      {
+        loading: 'Um segundo...',
+        success: data => {
+          location.reload();
+          return `Pet removido!`;
+        },
+        error: err => `Não foi possivel logar`,
+      },
+      {
+        success: {
+          icon: '🐶',
+        },
+        error: {
+          icon: '😓',
+        },
+      },
+    );
+  }
 
   if (pet && user) {
     return (
@@ -92,6 +122,7 @@ export const PetModal = () => {
                 message={
                   pet.status === 'perdido' ? 'Achei meu pet' : 'Remover pet'
                 }
+                onRemove={remove}
               />
             )}
           </div>

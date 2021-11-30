@@ -10,7 +10,7 @@ interface RemovePetProps {
 }
 
 export const RemovePet = ({ message, onRemove }: RemovePetProps) => {
-  const [confirm, setConfirm] = useState(true);
+  const [confirm, setConfirm] = useState(false);
 
   if (confirm) {
     return (

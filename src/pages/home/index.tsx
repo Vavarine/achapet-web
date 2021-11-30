@@ -56,10 +56,24 @@ export const getServerSideProps: GetServerSideProps = async ctx => {
     };
   }
 
-  const { data } = await api.get('/postsAnimals/list');
+  const { data: dataLost } = await api.get('/postsAnimals/list?tipo=perdidos');
+  const { data: dataFind } = await api.get('/postsAnimals/list?tipo=achados');
 
-  const treatedData = data.map(pet => {
+  const newData = [...dataLost, ...dataFind];
+
+  console.log(newData);
+
+  const treatedData = newData.map(pet => {
     if (!pet.status) {
+      pet.status = 'perdido';
+    }
+
+    if (pet.status === 'achados') {
+      pet.status = 'achado';
+    }
+
+    if (pet.status === 'perdidos') {
+      console.log('Perdidos');
       pet.status = 'perdido';
     }
 

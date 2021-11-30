@@ -21,15 +21,15 @@ export const MadeByCard = ({
       <S.InformationsPersonContainer>
         <h3>{name}</h3>
         <S.NewtWorkContainer>
-          <a href={networks.linkedin}>
+          <a href={networks.linkedin} target="_blank">
             <TiSocialLinkedinCircular size={25}></TiSocialLinkedinCircular>
             Linkedin
           </a>
-          <a href={networks.github}>
+          <a href={networks.github} target="_blank">
             <FaGithub size={20}></FaGithub>
             Gihub
           </a>
-          <a href={networks.instagram}>
+          <a href={networks.instagram} target="_blank">
             <FaInstagramSquare size={20}></FaInstagramSquare>
             Instagram
           </a>

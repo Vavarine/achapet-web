@@ -21,8 +21,7 @@ export const Header = () => {
       <S.LinksNavigation>
         {screenSize > 1024 && (
           <>
-            <a href="/">Adoção</a>
-            <a href="/">Depoimentos</a>
+            <a href="#depoiments">Depoimentos</a>
           </>
         )}
 

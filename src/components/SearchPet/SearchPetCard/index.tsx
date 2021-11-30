@@ -51,9 +51,13 @@ export default function SearchPetCard({ pet }: SearchPetCardProps) {
       <div className="pet-info">
         <span>{pet.status || 'perdido'}</span>
         <h4>{pet.nomeAnimal}</h4>
-        <p>
-          ({pet.raca} / {pet.cor})
-        </p>
+        {pet.raca !== '' && pet.cor !== '' ? (
+          <p>
+            ({pet.raca} / {pet.cor})
+          </p>
+        ) : (
+          ''
+        )}
       </div>
       {petLocationInfo && (
         <div className="location-info">

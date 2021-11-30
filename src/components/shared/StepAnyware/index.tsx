@@ -29,7 +29,7 @@ export const StepAnyware = ({
 
   const sendToBackRegister = async () => {
     const sendData = {
-      tipoPost: isActiveLostorFind ? 'achados' : 'perdidos',
+      status: isActiveLostorFind ? 'achado' : 'perdido',
       email: props.user.email,
       nome: props.user.name,
       celular: user.cellphone,
@@ -42,6 +42,8 @@ export const StepAnyware = ({
       longitude: props.longitude,
       fotos: filesUploads.length > 0 ? filesUploads.join(',') : undefined,
     };
+
+    console.log('sended', sendData);
 
     const response = await api('/postsAnimals/postagem', {
       method: 'POST',

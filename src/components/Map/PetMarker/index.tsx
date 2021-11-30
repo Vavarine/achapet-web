@@ -41,7 +41,7 @@ const PetMarker = ({ pet }: PetMarkerProps) => {
         <div onClick={() => openModal(pet)}>
           <p className="status">{'perdido'}</p>
           <p className="name">{nomeAnimal}</p>
-          <p className="breed">({raca})</p>
+          <p className="breed">({raca !== '' ? raca : 'desconhecido'})</p>
           <div className="see-more">
             Ver mais <FiArrowRight />
           </div>

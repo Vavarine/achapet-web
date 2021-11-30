@@ -84,7 +84,7 @@ const LandingPage = () => {
             </S.AdoptContainerImg>
           </S.AdoptContainer>
           <S.WhatPeopleSay>
-            <h2>
+            <h2 id="depoiments">
               O que as pessoas dizem sobre o <strong>AchaPet</strong>
             </h2>
             <S.WhatPeopleSayWrapper>
@@ -138,9 +138,9 @@ const LandingPage = () => {
                 name="Evailson"
                 photo="/assets/photo-eva.png"
                 networks={{
-                  linkedin: 'teste',
-                  github: 'teste',
-                  instagram: 'teste',
+                  linkedin: 'https://www.linkedin.com/in/evailson-barbosa/',
+                  github: 'https://github.com/vavarine',
+                  instagram: 'https://www.instagram.com/vavarine_/',
                 }}
               ></MadeByCard>
               <MadeByCard
@@ -156,9 +156,10 @@ const LandingPage = () => {
                 name="Lindomar"
                 photo="/assets/photo-sid.jpg"
                 networks={{
-                  linkedin: 'teste',
-                  github: 'teste',
-                  instagram: 'teste',
+                  linkedin:
+                    'https://www.linkedin.com/in/lindomar-nascimento-dev',
+                  github: 'https://github.com/lindomarNascimento',
+                  instagram: 'https://www.instagram.com/lindosid/',
                 }}
               ></MadeByCard>
             </S.MadeByWrapper>
