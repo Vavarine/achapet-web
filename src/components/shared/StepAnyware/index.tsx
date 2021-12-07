@@ -18,6 +18,7 @@ export const StepAnyware = ({
 }: StepWizardStepAnywareChildrenProps) => {
   const [isActiveLostorFind] = useReState('isActiveLostorFind', false);
   const [animalName] = useReState('animalName', '');
+  const [isLeaveContact] = useReState('isLeaveContact', '');
   const [typeAnimal] = useReState('animalType', '');
   const [raceAnimal] = useReState('animalRace', '');
   const [colorAnimal] = useReState('animalColor', '');
@@ -32,7 +33,7 @@ export const StepAnyware = ({
       status: isActiveLostorFind ? 'achado' : 'perdido',
       email: props.user.email,
       nome: props.user.name,
-      celular: user.cellphone,
+      celular: isLeaveContact ? user.cellphone : null,
       nomeAnimal: animalName,
       animalTipo: typeAnimal,
       raca: raceAnimal,

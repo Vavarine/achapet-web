@@ -91,7 +91,10 @@ export const Container = styled.div<Props>`
         height: 100%;
         width: 40px;
 
-        background: linear-gradient(to right, transparent, #ffe8e8);
+        background: ${props =>
+          props.status === 'perdido'
+            ? 'linear-gradient(to right, transparent, #ffe8e8)'
+            : 'linear-gradient(to right, transparent, rgba(239, 255, 223, 1))'};
       }
     }
   }

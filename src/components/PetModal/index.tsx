@@ -108,15 +108,23 @@ export const PetModal = () => {
 
           <div className="buttonContainer">
             {pet.email !== user.email ? (
-              <a
-                href={`https://api.whatsapp.com/send?phone=${pet.celular}&text=Ol%C3%A1%2C%20acho%20que%20vi%20seu%20pet!`}
-                target="_blank"
-                className="whatsapp"
-              >
-                {pet.status === 'perdido'
-                  ? 'Eu vi esse pet'
-                  : 'Esse é o meu pet'}
-              </a>
+              <>
+                {pet.celular && (
+                  <a
+                    href={
+                      pet.status === 'perdido'
+                        ? `https://api.whatsapp.com/send?phone=${pet.celular}&text=Ol%C3%A1%2C%20acho%20que%20voc%C3%AA%20viu%20um%20pet%20seu!`
+                        : `https://api.whatsapp.com/send?phone=${pet.celular}&text=Ol%C3%A1%2C%20acho%20que%20voc%C3%AA%20viu%20um%20pet%20meu!`
+                    }
+                    target="_blank"
+                    className="whatsapp"
+                  >
+                    {pet.status === 'perdido'
+                      ? 'Eu vi esse pet'
+                      : 'Esse é o meu pet'}
+                  </a>
+                )}
+              </>
             ) : (
               <RemovePet
                 message={
