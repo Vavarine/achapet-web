@@ -144,6 +144,9 @@ export const Step1 = (props: StepWizardChildrenProps) => {
             <option value="rajado">Rajado</option>
             <option value="verde">Verde</option>
             <option value="roxo">Roxo</option>
+            <option value="preto">Preto</option>
+            <option value="Branco">Branco</option>
+            <option value="Com manchas">Com manchas</option>
           </S.Select>
         </S.FormWrapper>
       </S.FormPet>

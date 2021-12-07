@@ -37,9 +37,9 @@ const LandingPage = () => {
                   <img src="/assets/petLogoBold.png" alt="Logo" />
                 </h2>
                 <p>
-                  Lorem Ipsum is simply dummy text of the printing and
-                  typesetting industry. Lorem Ipsum has been the industry's
-                  standard dummy
+                  AchaPet tem a proposta de facilitar a procura por um animal
+                  perdido utilizando geolocalização e emitindo alertas de
+                  procura e busca por um animal de estimação
                 </p>
                 <Link href="/institutional/quem-somos">
                   <button>Saiba mais</button>
@@ -50,32 +50,16 @@ const LandingPage = () => {
               </S.MainBannerImg>
             </S.MainBanner>
           </S.ContainerBackground>
-          <S.DescriptionContainer>
-            <h2>AchaPet</h2>
-            <h5>O site para encontra seu animal de estimação</h5>
-            <p>
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industry's standard dummy
-            </p>
-          </S.DescriptionContainer>
           <S.AdoptContainer>
-            <S.AdoptContainerText>
-              <p>
-                Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry. Lorem Ipsum has been the industry's standard dummy
-              </p>
-            </S.AdoptContainerText>
             <S.AdoptContainer />
             <S.AdoptContainerText>
-              <h2>Adote um pet</h2>
+              <h2>AchaPet</h2>
+              <p>O site para encontrar seu animal de estimação</p>
               <p>
-                Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry. Lorem Ipsum is simply dummy text of the printing and
-                typesetting industry.
-              </p>
-              <p>
-                Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry. Lorem Ipsum is simply dummy
+                Nosso diferencial é ser uma página Web totalmente voltado para
+                buscas de animais que se perderam de seus tutores.Atualmente, as
+                pessoas procuram seus animais utilizando redese sociais, nossas
+                páginas facilitaria isso.
               </p>
               <a>Saiba mais</a>
             </S.AdoptContainerText>
@@ -89,22 +73,19 @@ const LandingPage = () => {
             </h2>
             <S.WhatPeopleSayWrapper>
               <WhatPeopleSayCard
-                text="Lorem Ipsum is simply
-              dummy text of the printing and typesetting"
+                text="Otimo aplicativo consegui encontrar meu pet"
                 author="Lindomar"
                 data="12/02/12"
               ></WhatPeopleSayCard>
               <WhatPeopleSayCard
-                text="Lorem Ipsum is simply
-              dummy text of the printing and typesetting"
-                author="Lindomar"
-                data="12/02/12"
+                text="Me ajudaram com meu doguinho"
+                author="Amanda"
+                data="05/12/17"
               ></WhatPeopleSayCard>
               <WhatPeopleSayCard
-                text="Lorem Ipsum is simply
-              dummy text of the printing and typesetting"
-                author="Lindomar"
-                data="12/02/12"
+                text="Pessimo aplicativo, horrivel"
+                author="Ana Paula"
+                data="16/07/2021"
               ></WhatPeopleSayCard>
             </S.WhatPeopleSayWrapper>
           </S.WhatPeopleSay>
