@@ -5,7 +5,7 @@ import * as S from './styles';
 
 export const StepSucess = (props: StepWizardChildrenProps) => {
   return (
-    <S.ContainerSucess onClick={props.closeModal}>
+    <S.ContainerSucess onClick={(props.closeModal, location.reload)}>
       <S.IconSucess size={90} />
       <S.Text>Dados cadastrados com sucesso!</S.Text>
     </S.ContainerSucess>
